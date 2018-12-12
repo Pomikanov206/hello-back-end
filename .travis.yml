@@ -3,6 +3,7 @@ sudo: false
 jdk:
  - oraclejdk8
 install: true
+./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -Dmaven=ony -B -V
 cache:
   directories:
   - $HOME/.m2
