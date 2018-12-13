@@ -2,6 +2,7 @@ package com.ua.pomikanov.hellobackend.controllers;
 
 import com.ua.pomikanov.hellobackend.JavaPostgreSqlRetrieve;
 import com.ua.pomikanov.hellobackend.domain.Contact;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,10 +17,13 @@ import java.util.regex.Pattern;
 public class HelloController {
     private static final String template = "Hello, %s!";
 
+    @Autowired
+    private JavaPostgreSqlRetrieve javaPostgreSqlRetrieve;
+
     @RequestMapping("/hello/contacts")
     @ResponseBody
     public List<Contact> contacts(@RequestParam(value = "nameFilter", required = false, defaultValue = "World!") String nameFilter) {
-        List<Contact> contacts = JavaPostgreSqlRetrieve.getContacts();
+        List<Contact> contacts = javaPostgreSqlRetrieve.getContacts();
         return replaceContacts(contacts, nameFilter);
     }
 
