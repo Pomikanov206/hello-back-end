@@ -20,6 +20,9 @@ before_install:
 install: ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -DskipNpmBuild=true -B -V
 
 script: ./mvnw verify ${TRAVIS_TAG:+-Drevision=${TRAVIS_TAG} -DdisableSpringSnapshots=true}
+script:
+  - bash -c "nvm use $NODE_JS_VERSION" || true
+  - bash -c "source ~/.nvm/nvm.sh; nvm install $NODE_JS_VERSION; node --version"
 
 after_success:
   - ./mvnw jacoco:report coveralls:report
