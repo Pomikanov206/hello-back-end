@@ -20,3 +20,13 @@ after_success:
   - ./mvnw jacoco:report coveralls:report
   - "[[ ${TRAVIS_PULL_REQUEST} == 'false' ]] && [[ ${TRAVIS_TAG} == '' ]] && ./mvnw deploy -DreposityId=sonatype-nexus-snapshots -DskipTests --settings deploy-settings.xml"
   - "[[ ${TRAVIS_PULL_REQUEST} == 'false' ]] && [[ ${TRAVIS_TAG} != '' ]] && ./mvnw deploy -DreposityId=sonatype-nexus-staging -DskipTests -Drevision=${TRAVIS_TAG} -DdisableSpringSnapshots=true --settings deploy-settings.xml"
+
+udo: true
+dist: trusty
+jdk: oraclejdk9
+addons:
+  apt:
+    packages:
+      - oracle-java9-installer
+before_install:
+  - chmod +x mvnw
