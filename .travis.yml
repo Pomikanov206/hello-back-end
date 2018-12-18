@@ -1,4 +1,6 @@
 language: java
+env:
+  - TRAVIS_NODE_VERSION="lts/*"
 jdk:
 - oraclejdk8
 # git strips the wrapper jar file so we have to force its download during the build
